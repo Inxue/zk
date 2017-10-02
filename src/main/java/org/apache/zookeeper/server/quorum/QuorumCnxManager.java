@@ -103,6 +103,7 @@ public class QuorumCnxManager {
     /*
      * Reception queue
      */
+    //消息接受队列
     public final ArrayBlockingQueue<Message> recvQueue;
     /*
      * Object to synchronize access to recvQueue

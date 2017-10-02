@@ -56,6 +56,7 @@ public class FastLeaderElection implements Election {
      * once it believes that it has reached the end of
      * leader election.
      */
+    //leader选举结束之后要等200ms？为什么
     final static int finalizeWait = 200;
 
 
@@ -65,6 +66,7 @@ public class FastLeaderElection implements Election {
      * the system up again after long partitions. Currently 60 seconds.
      */
 
+    //最大通知间隔
     final static int maxNotificationInterval = 60000;
 
     /**
@@ -73,6 +75,7 @@ public class FastLeaderElection implements Election {
      * such connections.
      */
 
+    //集群内网络通信类
     QuorumCnxManager manager;
 
 
@@ -83,6 +86,7 @@ public class FastLeaderElection implements Election {
      * peer with higher zxid or same zxid and higher server id
      */
 
+    //这个内部类主要用来做什么?
     static public class Notification {
         /*
          * Format version, introduced in 3.4.6
@@ -227,6 +231,7 @@ public class FastLeaderElection implements Election {
          * method run(), and processes such messages.
          */
 
+        //用于接收来自集群内其它节点发来的消息
         class WorkerReceiver implements Runnable {
             volatile boolean stop;
             QuorumCnxManager manager;

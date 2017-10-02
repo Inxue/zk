@@ -106,7 +106,8 @@ public class QuorumPeer extends Thread implements QuorumStats.Provider {
         public InetSocketAddress addr;
 
         public InetSocketAddress electionAddr;
-        
+
+        //serverId
         public long id;
         
         public LearnerType type = LearnerType.PARTICIPANT;
