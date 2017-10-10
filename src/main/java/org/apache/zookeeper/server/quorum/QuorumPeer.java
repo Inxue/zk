@@ -167,6 +167,7 @@ public class QuorumPeer extends Thread implements QuorumStats.Provider {
     /**
      * The servers that make up the cluster
      */
+    //quorumPeers存储了集群中的所有节点
     protected Map<Long, QuorumServer> quorumPeers;
     public int getQuorumSize(){
         return getVotingView().size();
@@ -849,12 +850,13 @@ public class QuorumPeer extends Thread implements QuorumStats.Provider {
      * Observers are not contained in this view, only nodes with
      * PeerType=PARTICIPANT.
      */
+    //获取所有可以投票的服务器id
     public Map<Long,QuorumServer> getVotingView() {
         Map<Long,QuorumServer> ret =
             new HashMap<Long, QuorumServer>();
         Map<Long,QuorumServer> view = getView();
         for (QuorumServer server : view.values()) {
-            if (server.type == LearnerType.PARTICIPANT) {
+            if (server.type == LearnerType.PARTICIPANT) {//状态为PARTICIPANT的节点
                 ret.put(server.id, server);
             }
         }

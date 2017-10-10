@@ -96,6 +96,7 @@ public class QuorumCnxManager {
     /*
      * Mapping from Peer to Thread number
      */
+    //发送给集群中不同服务器的线程互不干扰
     final ConcurrentHashMap<Long, SendWorker> senderWorkerMap;
     final ConcurrentHashMap<Long, ArrayBlockingQueue<ByteBuffer>> queueSendMap;
     final ConcurrentHashMap<Long, ByteBuffer> lastMessageSent;
@@ -103,7 +104,7 @@ public class QuorumCnxManager {
     /*
      * Reception queue
      */
-    //消息接受队列
+    //底层I/O消息接收队列
     public final ArrayBlockingQueue<Message> recvQueue;
     /*
      * Object to synchronize access to recvQueue
@@ -126,6 +127,7 @@ public class QuorumCnxManager {
      */
     private AtomicInteger threadCnt = new AtomicInteger(0);
 
+    //集群中其它服务器发送来的消息
     static public class Message {
         
         Message(ByteBuffer buffer, long sid) {
@@ -173,6 +175,7 @@ public class QuorumCnxManager {
      * If this server has initiated the connection, then it gives up on the
      * connection if it loses challenge. Otherwise, it keeps the connection.
      */
+    //初始化，发起连接
     public boolean initiateConnection(Socket sock, Long sid) {
         DataOutputStream dout = null;
         try {
@@ -226,6 +229,7 @@ public class QuorumCnxManager {
      * possible long value to lose the challenge.
      * 
      */
+    //接收连接
     public boolean receiveConnection(Socket sock) {
         Long sid = null;
         
@@ -308,6 +312,7 @@ public class QuorumCnxManager {
      * Processes invoke this message to queue a message to send. Currently, 
      * only leader election uses it.
      */
+    //只有leader服务器会用到这个方法
     public void toSend(Long sid, ByteBuffer b) {
         /*
          * If sending message to myself, then simply enqueue it (loopback).
