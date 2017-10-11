@@ -644,6 +644,7 @@ public class FastLeaderElection implements Election {
      * have sufficient to declare the end of the election round.
      *
      */
+    //最后的归票
     protected boolean termPredicate(
             HashMap<Long, Vote> votes,
             Vote vote) {
@@ -674,6 +675,7 @@ public class FastLeaderElection implements Election {
      * @param   leader  leader id
      * @param   electionEpoch   epoch id
      */
+    //检查leader
     protected boolean checkLeader(
             HashMap<Long, Vote> votes,
             long leader,
@@ -908,6 +910,7 @@ public class FastLeaderElection implements Election {
                         //recvset记录本轮选举收到的所有外部投票
                         recvset.put(n.sid, new Vote(n.leader, n.zxid, n.electionEpoch, n.peerEpoch));
 
+                        //统计投票
                         if (termPredicate(recvset,
                                 new Vote(proposedLeader, proposedZxid,
                                         logicalclock, proposedEpoch))) {
@@ -950,6 +953,7 @@ public class FastLeaderElection implements Election {
                          * Consider all notifications from the same epoch
                          * together.
                          */
+                        //选票处于同一个选举周期
                         if(n.electionEpoch == logicalclock){
                             recvset.put(n.sid, new Vote(n.leader,
                                                           n.zxid,

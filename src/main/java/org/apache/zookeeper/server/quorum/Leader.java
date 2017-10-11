@@ -523,6 +523,7 @@ public class Leader {
      *                the zxid of the proposal sent out
      * @param followerAddr
      */
+    //leader服务器处理ack反馈
     synchronized public void processAck(long sid, long zxid, SocketAddress followerAddr) {
         if (LOG.isTraceEnabled()) {
             LOG.trace("Ack zxid: 0x{}", Long.toHexString(zxid));
