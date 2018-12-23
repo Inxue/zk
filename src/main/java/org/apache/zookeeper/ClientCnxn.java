@@ -388,7 +388,7 @@ public class ClientCnxn {
     private Object eventOfDeath = new Object();
 
     private final static UncaughtExceptionHandler uncaughtExceptionHandler = new UncaughtExceptionHandler() {
-        @Override
+//        @Override
         public void uncaughtException(Thread t, Throwable e) {
             LOG.error("from " + t.getName(), e);
         }

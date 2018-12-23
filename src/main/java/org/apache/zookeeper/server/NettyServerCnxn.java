@@ -151,13 +151,13 @@ public class NettyServerCnxn extends ServerCnxn {
         ResumeMessageEvent(Channel channel) {
             this.channel = channel;
         }
-        @Override
+//        @Override
         public Object getMessage() {return null;}
-        @Override
+//        @Override
         public SocketAddress getRemoteAddress() {return null;}
-        @Override
+//        @Override
         public Channel getChannel() {return channel;}
-        @Override
+//        @Override
         public ChannelFuture getFuture() {return null;}
     };
     
